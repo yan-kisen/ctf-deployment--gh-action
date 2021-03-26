@@ -14,7 +14,7 @@ import * as github from '@actions/github'
 import {Context} from '@actions/github/lib/context'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const stringifySafe = require('json-stringify-safe')
+
 
 const ghContextData: Context = github.context
 
@@ -30,7 +30,6 @@ async function run(): Promise<void> {
 
     core.startGroup('deployment-action')
 
-    core.info(`context: ${stringifySafe(ghContextData)}`)
     // eslint-disable-next-line no-console
     console.log(`stringify: ${JSON.stringify(ghContextData)}`)
     // eslint-disable-next-line no-console
