@@ -1,11 +1,37 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Contentful Deployment Action'
+description: 'Composite Github Action to run a custom Nuxt/Contentful deployment process'
+author: 'yan.kisen@coresecure.com'
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  cache-dir-path:
+    required: false
+    description: 'Directory path where generated files will be saved Defaults to `./.cache`'
+    default: './.cache'
+  ctf-file-name:
+    required: false
+    description: 'Contentful Sync data filename. Defaults to `syncCollection.json'
+    default: 'syncCollection.json'
+  gh-file-name:
+    required: false
+    description: 'Github Context data filename. Defaults to `ghContext.json'
+    default: 'ghContext.json'
+  changelist-id:
+    required: false
+    description: 'Changelist ID to be queried & then overlayed on top of the initial Contentful Sync'
+  ctf-environment-id:
+    required: false
+    description: 'Contentful environment name. (NOTE: until further notice, this will always be "master")'
+    default: 'master'
+  use-preview-api:
+    required: false
+    description: 'If "true", the Sync operation is performed against the Content Preview API. (NOTE: This will disregard any input provided for the `changelist-id`)'
+## TODO: surely we can think of something to output...
+# outputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  # NOTE: All icons here: https://haya14busa.github.io/github-action-brandings/ https://feathericons.com/
+  # NOTE: colors: ['white', 'yellow', 'blue', 'green', 'orange', 'red', 'purple', 'gray-dark']
+  color: 'orange'
+  icon: 'upload-cloud'
+

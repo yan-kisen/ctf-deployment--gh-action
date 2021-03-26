@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
+  "name": "ctf-deployment--gh-action",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Composite GithubAction to deploy a Static `Nuxt` site with data from `Contentful`",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -10,26 +10,39 @@
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest",
+    "bundle": "npm run build && npm run package",
+    "test": "jest --passWithNoTests",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/yankisen/ctf-deployment--gh-action.it"
   },
   "keywords": [
     "actions",
-    "node",
-    "setup"
+    "nuxt",
+    "contentful"
   ],
-  "author": "",
+  "author": {
+    "name": "yan-kisen",
+    "email": "yan.kisen@coresecure.com",
+    "website": "https://coresecure.com"
+  },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/artifact": "^0.5.0",
+    "@actions/cache": "^1.0.6",
+    "@actions/core": "^1.2.6",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^4.0.0",
+    "@actions/io": "^1.0.2",
+      "json-stringify-safe": "^5.0.1",
+    "nuxt": "^2.14.8"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.14.8",
     "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.9",
+    "@types/node": "^12.20.6",
     "@typescript-eslint/parser": "^4.8.1",
     "@vercel/ncc": "^0.25.1",
     "eslint": "^7.17.0",
