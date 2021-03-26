@@ -13,9 +13,6 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {Context} from '@actions/github/lib/context'
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-
-
 const ghContextData: Context = github.context
 
 async function run(): Promise<void> {
