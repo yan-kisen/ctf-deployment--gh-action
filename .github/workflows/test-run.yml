@@ -23,6 +23,8 @@ jobs:
       NODE_ENV: production
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: coresecure/www2_sunovionprofile_com--tmp
       - uses: ./
         with:
           changelist-id: 'changelist-pmrc-1'

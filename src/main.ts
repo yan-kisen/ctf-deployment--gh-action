@@ -40,11 +40,16 @@ async function run(): Promise<void> {
     // eslint-disable-next-line no-console
     console.log(`ref: ${BRANCH_NAME}`)
 
-    const execRes = await exec.exec('ls')
+    await exec.exec('ls')
 
-    // eslint-disable-next-line no-console
-    console.log(`execRes: ${execRes}`)
-    //
+    core.debug('yo yo')
+
+    // nuxt generate
+    await exec.exec('yarn generate:spa', [
+      '--siteDir=build/_site',
+      '--use-preview-api',
+      '--disable-sentry'
+    ])
 
     //
     // ## (4) Run Nuxt Build & Generate
