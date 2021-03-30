@@ -11,7 +11,9 @@
  */
 import * as core from '@actions/core'
 import * as github from '@actions/github'
+import * as exec from '@actions/exec'
 import {Context} from '@actions/github/lib/context'
+import {removeGithubRef} from './lib/gh-util'
 
 const ghContextData: Context = github.context
 
@@ -29,13 +31,21 @@ async function run(): Promise<void> {
 
     // eslint-disable-next-line no-console
     console.log(`stringify: ${JSON.stringify(ghContextData)}`)
-    // eslint-disable-next-line no-console
-    console.log(`ref: ${ghContextData.ref}`)
 
-    core.endGroup()
     //
     // ## (3) Normalize the reference (ex: `refs/heads/test` ==> `test` )
+
+    const BRANCH_NAME = removeGithubRef(ghContextData.ref)
+
+    // eslint-disable-next-line no-console
+    console.log(`ref: ${BRANCH_NAME}`)
+
+    const execRes = await exec.exec('ls')
+
+    // eslint-disable-next-line no-console
+    console.log(`execRes: ${execRes}`)
     //
+
     //
     // ## (4) Run Nuxt Build & Generate
     //    (4.a) Check GH cache for `.nuxt/` output (IF unchanged, skip Build)
@@ -48,6 +58,8 @@ async function run(): Promise<void> {
     // ## (7) Prepare `s3_website.yml`
     //
     // ## (8) Zip & Upload `build/` to Backups Bucket
+
+    core.endGroup()
     //
   } catch (error) {
     core.setFailed(error.message)
