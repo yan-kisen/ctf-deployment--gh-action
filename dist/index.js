@@ -93,10 +93,14 @@ function run() {
             const BRANCH_NAME = gh_util_1.removeGithubRef(ghContextData.ref);
             // eslint-disable-next-line no-console
             console.log(`ref: ${BRANCH_NAME}`);
-            const execRes = yield exec.exec('ls');
-            // eslint-disable-next-line no-console
-            console.log(`execRes: ${execRes}`);
-            //
+            yield exec.exec('ls');
+            core.debug('yo yo');
+            // nuxt generate
+            yield exec.exec('yarn generate:spa', [
+                '--siteDir=build/_site',
+                '--use-preview-api',
+                '--disable-sentry'
+            ]);
             //
             // ## (4) Run Nuxt Build & Generate
             //    (4.a) Check GH cache for `.nuxt/` output (IF unchanged, skip Build)
